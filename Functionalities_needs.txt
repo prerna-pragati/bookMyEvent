@@ -1,0 +1,24 @@
+Main Functionality :
+
+1. View events
+2. Each event, on clicked should show event details 
+3. Inside the event detail, book tickets 
+4. Once booked, send email to user - a booking confirmation 
+
+Add new events : 
+
+1. Fill a form and submit
+
+User login :
+
+1. Login/ Sign up
+
+My bookings :
+
+1. View history of bookings
+
+Models needed:
+
+1. Event 
+2. Category
+3. User 
