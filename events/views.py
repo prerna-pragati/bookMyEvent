@@ -14,8 +14,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import (
     EventCategory,
     Event,
-    JobCategory,
-    EventJobCategoryLinking,
+    # JobCategory,
+    # EventJobCategoryLinking,
     EventMember,
     EventUserWishList,
     UserCoin,
@@ -123,7 +123,7 @@ class EventListView(LoginRequiredMixin, ListView):
 class EventUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'login'
     model = Event
-    fields = ['category', 'name', 'uid', 'description', 'scheduled_status', 'venue', 'start_date', 'end_date', 'location', 'points', 'maximum_attende', 'status']
+    fields = ['category', 'name', 'ufid', 'description', 'scheduled_status', 'venue', 'start_date', 'end_date', 'location', 'points', 'maximum_attende', 'status']
     template_name = 'events/edit_event.html'
 
 
