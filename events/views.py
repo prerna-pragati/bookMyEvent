@@ -62,8 +62,8 @@ class EventCategoryDeleteView(LoginRequiredMixin, DeleteView):
 @login_required(login_url='login')
 def create_event(request):
     event_form = EventForm()
-    event_image_form = EventImageForm()
     event_agenda_form = EventAgendaForm()
+    event_image_form = EventImageForm()
     catg = EventCategory.objects.all()
     if request.method == 'POST':
         event_form = EventForm(request.POST)
