@@ -2,6 +2,7 @@ from django.contrib import admin
 from mapbox_location_field.admin import MapAdmin
 
 from .models import (
+    Booking,
     EventCategory,
     Event,
     # JobCategory,
@@ -20,3 +21,4 @@ admin.site.register(EventMember)
 admin.site.register(EventUserWishList)
 admin.site.register(UserCoin)
 admin.site.register(UserSystem)
+admin.site.register(Booking)

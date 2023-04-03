@@ -30,11 +30,19 @@ def login_page(request):
         if forms.is_valid():
             username = forms.cleaned_data['username']
             password = forms.cleaned_data['password']
-            response = UserSystem.objects.get(username=username)
-            print(response)
-            if response:
-                # login(request, username)
-                return redirect('dashboard')
+            print("hello")
+            print(username)
+            # try:
+            #     response = UserSystem.objects.get(username=username)
+            #     print(response)
+            #     if response:
+            #         print("Here")
+            #         return redirect('dashboard')
+            #         # login(request, username)
+                    
+            # except:
+            #     print("Not a user")
+
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)

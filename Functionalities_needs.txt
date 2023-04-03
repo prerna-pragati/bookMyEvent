@@ -12,7 +12,7 @@ DONE: 1. Fill a form and submit
 
 User login :
 
-TODO : 
+TODO : <DONE>
 1. Login/ Sign up
 
 My bookings :

@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import (
+    Booking,
     EventCategory,
     Event,
     # JobCategory,
@@ -44,6 +45,18 @@ class EventCategoryCreateView(LoginRequiredMixin, CreateView):
         form.instance.created_user = self.request.user
         form.instance.updated_user = self.request.user
         return super().form_valid(form)
+
+class BookEventCreateView(LoginRequiredMixin, CreateView):
+    # login_url = 'login'
+    model = Booking
+    fields = ['eventname','numtickets','username']
+    template_name = 'events/book_event.html'
+
+    def form_valid(self, form):
+        print("Trying to save")
+        evt = form.save()
+        return redirect('event-list')
+        # return super().form_valid(form)
 
 
 class EventCategoryUpdateView(LoginRequiredMixin, UpdateView):
@@ -123,7 +136,7 @@ class EventListView(LoginRequiredMixin, ListView):
 class EventUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'login'
     model = Event
-    fields = ['category', 'name', 'ufid', 'description', 'scheduled_status', 'venue', 'start_date', 'end_date', 'location', 'points', 'maximum_attende', 'status']
+    fields = ['category', 'name', 'ufid', 'description', 'scheduled_status', 'venue', 'start_date', 'end_date', 'location', 'points', 'maximum_attende','num_tickets_available', 'status']
     template_name = 'events/edit_event.html'
 
 

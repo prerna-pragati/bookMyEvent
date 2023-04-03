@@ -6,6 +6,7 @@ from .views import (
     EventCategoryUpdateView,
     EventCategoryDeleteView,
     EventCreateView,
+    BookEventCreateView,
     EventListView,
     EventUpdateView,
     EventDetailView,
@@ -34,6 +35,8 @@ urlpatterns = [
     path('category/<int:pk>/delete/', EventCategoryDeleteView.as_view(), name='delete-event-category'),
     path('event-create/', EventCreateView.as_view(), name='event-create'),
     path('event-list/', EventListView.as_view(), name='event-list'),
+    path('book-event/', BookEventCreateView.as_view(), name='book-event'),
+
     path('event/<int:pk>/edit/', EventUpdateView.as_view(), name='event-edit'),
     path('detail/<int:pk>', EventDetailView.as_view(), name='event-detail'),
     path('delete/<int:pk>', EventDeleteView.as_view(), name='event-delete'),

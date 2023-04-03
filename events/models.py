@@ -52,6 +52,7 @@ class Event(models.Model):
     # location = LocationField()
     # points = models.PositiveIntegerField()
     maximum_attende = models.PositiveIntegerField()
+    num_tickets_available = models.PositiveIntegerField(default=0)
     created_user = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=True, null=True, related_name='event_created_user')
     updated_user = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=True, null=True, related_name='event_updated_user')
     created_date = models.DateField(auto_now_add=True)
@@ -82,11 +83,14 @@ class Event(models.Model):
 class Booking(models.Model):
     eventname = models.ForeignKey(Event, on_delete=models.CASCADE)
     numtickets = models.PositiveIntegerField()
+    username = models.CharField(max_length=255, default='priya')
+    # username = models.ForeignKey('auth.User', on_delete=models.CASCADE,related_name='event_booking_user')
+    # username = models.ForeignKey('auth.User', on_delete=models.CASCADE,related_name='event_booking_user')
 
 class UserSystem(models.Model):
     username = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
-    booking_list = models.ManyToManyField(Booking)
+    # booking_list = models.ManyToManyField(Booking)
 
 class EventImage(models.Model):
     event = models.OneToOneField(Event, on_delete=models.CASCADE)
