@@ -1,9 +1,10 @@
+from urllib import response
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
-from events.models import EventCategory, Event
+from events.models import EventCategory, Event, UserSystem
 from .forms import LoginForm
 
 @login_required(login_url='login')
@@ -29,6 +30,11 @@ def login_page(request):
         if forms.is_valid():
             username = forms.cleaned_data['username']
             password = forms.cleaned_data['password']
+            response = UserSystem.objects.get(username=username)
+            print(response)
+            if response:
+                # login(request, username)
+                return redirect('dashboard')
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
@@ -41,3 +47,33 @@ def login_page(request):
 def logut_page(request):
     logout(request)
     return redirect('login')
+
+def register_user(request):
+    forms = LoginForm()
+    if request.method == 'POST':
+        forms = LoginForm(request.POST)
+        if forms.is_valid():
+            username = forms.cleaned_data['username']
+            password = forms.cleaned_data['password']
+            print("Trying to store")
+            print(username)
+            print(password)
+            obj = UserSystem(username=username, password=password)
+            obj.save()
+            # reg = forms.save()
+            # print(forms.cleaned_data)
+            # Users.objects.create(**forms.cleaned_data)
+            response = UserSystem.objects.get(username=username)
+            print(response)
+            if response:
+                # login(request, username)
+                return redirect('dashboard')
+            else:
+                user = authenticate(username=username, password=password)
+                if user:
+                    login(request, user)
+                    return redirect('dashboard')
+    context = {
+        'form': forms
+    }
+    return render(request, 'register.html', context)

@@ -79,6 +79,15 @@ class Event(models.Model):
         obj.updated_by = request.user
         obj.save()
 
+class Booking(models.Model):
+    eventname = models.ForeignKey(Event, on_delete=models.CASCADE)
+    numtickets = models.PositiveIntegerField()
+
+class UserSystem(models.Model):
+    username = models.CharField(max_length=255, unique=True)
+    password = models.CharField(max_length=255)
+    booking_list = models.ManyToManyField(Booking)
+
 class EventImage(models.Model):
     event = models.OneToOneField(Event, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='event_image/')
