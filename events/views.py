@@ -34,6 +34,14 @@ class EventCategoryListView(LoginRequiredMixin, ListView):
     template_name = 'events/event_category.html'
     context_object_name = 'event_category'
 
+class ViewBookingsListView(LoginRequiredMixin, ListView):
+    model = Booking
+    fields = ['eventname','numtickets','username']
+    template_name = 'events/view_bookings.html'
+    context_object_name = 'view_bookings'
+
+    def get_queryset(self):
+        return Booking.objects.filter(username='priya')
 
 class EventCategoryCreateView(LoginRequiredMixin, CreateView):
     login_url = 'login'

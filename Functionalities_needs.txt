@@ -2,8 +2,8 @@ Main Functionality :
 
 DONE : 1. View events
 DONE : 2. Each event, on clicked should show event details 
-TODO: 3. Inside the event detail, book tickets 
-TODO: 4. Once booked, send email to user - a booking confirmation 
+TODO: 3. Inside the event detail, book tickets : DONE
+TODO: 4. Once booked, send email to user - a booking confirmation
 TODO : 5. Groups (Find people)
 
 Add new events : 
@@ -17,10 +17,10 @@ TODO : <DONE>
 
 My bookings :
 
-TODO: 1. View history of bookings
+TODO: 1. View history of bookings - <DONE>
 
 Models needed:
 
 DONE: 1. Event 
 DONE: 2. Category
-TODO: 3. User/Account
+TODO: 3. User/Account <DONE>
