@@ -9,6 +9,7 @@ from .models import (
     EventMember,
     EventUserWishList,
     UserCoin,
+    UserSystem,
 )
 
 admin.site.register(EventCategory)
@@ -18,3 +19,4 @@ admin.site.register(Event, MapAdmin)
 admin.site.register(EventMember)
 admin.site.register(EventUserWishList)
 admin.site.register(UserCoin)
+admin.site.register(UserSystem)
