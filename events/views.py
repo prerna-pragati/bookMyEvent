@@ -12,12 +12,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import (
+    Booking,
     EventCategory,
     Event,
     # JobCategory,
     # EventJobCategoryLinking,
     EventMember,
     EventUserWishList,
+    StudentGroup,
     UserCoin,
     EventImage,
     EventAgenda
@@ -33,6 +35,16 @@ class EventCategoryListView(LoginRequiredMixin, ListView):
     template_name = 'events/event_category.html'
     context_object_name = 'event_category'
 
+class ViewBookingsListView(LoginRequiredMixin, ListView):
+    model = Booking
+    fields = ['eventname','numtickets','username']
+    template_name = 'events/view_bookings.html'
+    context_object_name = 'view_bookings'
+
+    def get_queryset(self):
+        current_user = self.request.user
+        print(current_user)
+        return Booking.objects.filter(username=current_user)
 
 class EventCategoryCreateView(LoginRequiredMixin, CreateView):
     login_url = 'login'
@@ -45,6 +57,38 @@ class EventCategoryCreateView(LoginRequiredMixin, CreateView):
         form.instance.updated_user = self.request.user
         return super().form_valid(form)
 
+class BookEventCreateView(LoginRequiredMixin, CreateView):
+    # login_url = 'login'
+    model = Booking
+    fields = ['eventname','numtickets','username']
+    template_name = 'events/book_event.html'
+
+    def form_valid(self, form):
+        print("Trying to save")
+        evt = form.save()
+        return redirect('event-list')
+        # return super().form_valid(form)
+
+class GroupsCreateView(LoginRequiredMixin, CreateView):
+    model = StudentGroup
+    fields = ['event','groupname','numavail','transport']
+    template_name = 'events/create_group.html'
+
+    def form_valid(self, form):
+        print("Trying to save")
+        evt = form.save()
+        return redirect('event-list')
+
+class ViewGroupsListView(LoginRequiredMixin, ListView):
+    model = StudentGroup
+    fields = ['event','groupname','numavail','transport']
+    template_name = 'events/view_groups.html'
+    context_object_name = 'view_groups'
+
+    def get_queryset(self):
+        current_user = self.request.user
+        print(current_user)
+        return StudentGroup.objects.all()
 
 class EventCategoryUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'login'
@@ -123,7 +167,7 @@ class EventListView(LoginRequiredMixin, ListView):
 class EventUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'login'
     model = Event
-    fields = ['category', 'name', 'ufid', 'description', 'scheduled_status', 'venue', 'start_date', 'end_date', 'location', 'points', 'maximum_attende', 'status']
+    fields = ['category', 'name', 'ufid', 'description', 'scheduled_status', 'venue', 'start_date', 'end_date', 'location', 'points', 'maximum_attende','num_tickets_available', 'status']
     template_name = 'events/edit_event.html'
 
 

@@ -30,11 +30,19 @@ def login_page(request):
         if forms.is_valid():
             username = forms.cleaned_data['username']
             password = forms.cleaned_data['password']
-            response = UserSystem.objects.get(username=username)
-            print(response)
-            if response:
-                # login(request, username)
-                return redirect('dashboard')
+            print("hello")
+            print(username)
+            # try:
+            #     response = UserSystem.objects.get(username=username)
+            #     print(response)
+            #     if response:
+            #         print("Here")
+            #         return redirect('dashboard')
+            #         # login(request, username)
+                    
+            # except:
+            #     print("Not a user")
+
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
@@ -58,21 +66,28 @@ def register_user(request):
             print("Trying to store")
             print(username)
             print(password)
-            obj = UserSystem(username=username, password=password)
+            obj = User.objects.create_user(username=username, password=password)
             obj.save()
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect('dashboard')
+
+            # obj = UserSystem(username=username, password=password)
+            # obj.save()
             # reg = forms.save()
             # print(forms.cleaned_data)
             # Users.objects.create(**forms.cleaned_data)
-            response = UserSystem.objects.get(username=username)
-            print(response)
-            if response:
-                # login(request, username)
-                return redirect('dashboard')
-            else:
-                user = authenticate(username=username, password=password)
-                if user:
-                    login(request, user)
-                    return redirect('dashboard')
+            # response = User.objects.get(username=username)
+            # print(response)
+            # if response:
+            #     # login(request, username)
+            #     return redirect('dashboard')
+            # else:
+            #     user = authenticate(username=username, password=password)
+            #     if user:
+            #         login(request, user)
+            #         return redirect('dashboard')
     context = {
         'form': forms
     }
