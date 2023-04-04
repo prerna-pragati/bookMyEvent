@@ -83,7 +83,7 @@ class Event(models.Model):
 class Booking(models.Model):
     eventname = models.ForeignKey(Event, on_delete=models.CASCADE)
     numtickets = models.PositiveIntegerField()
-    username = models.CharField(max_length=255, default='priya')
+    username = models.CharField(max_length=255)
     # username = models.ForeignKey('auth.User', on_delete=models.CASCADE,related_name='event_booking_user')
     # username = models.ForeignKey('auth.User', on_delete=models.CASCADE,related_name='event_booking_user')
 

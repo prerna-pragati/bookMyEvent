@@ -41,7 +41,9 @@ class ViewBookingsListView(LoginRequiredMixin, ListView):
     context_object_name = 'view_bookings'
 
     def get_queryset(self):
-        return Booking.objects.filter(username='priya')
+        current_user = self.request.user
+        print(current_user)
+        return Booking.objects.filter(username=current_user)
 
 class EventCategoryCreateView(LoginRequiredMixin, CreateView):
     login_url = 'login'
