@@ -96,6 +96,11 @@ class EventImage(models.Model):
     event = models.OneToOneField(Event, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='event_image/')
 
+class StudentGroup(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    groupname = models.CharField(max_length=255)
+    numavail = models.PositiveIntegerField()
+    transport = models.CharField(max_length=255)
 
 class EventAgenda(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)

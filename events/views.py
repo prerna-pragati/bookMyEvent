@@ -19,6 +19,7 @@ from .models import (
     # EventJobCategoryLinking,
     EventMember,
     EventUserWishList,
+    StudentGroup,
     UserCoin,
     EventImage,
     EventAgenda
@@ -68,6 +69,26 @@ class BookEventCreateView(LoginRequiredMixin, CreateView):
         return redirect('event-list')
         # return super().form_valid(form)
 
+class GroupsCreateView(LoginRequiredMixin, CreateView):
+    model = StudentGroup
+    fields = ['event','groupname','numavail','transport']
+    template_name = 'events/create_group.html'
+
+    def form_valid(self, form):
+        print("Trying to save")
+        evt = form.save()
+        return redirect('event-list')
+
+class ViewGroupsListView(LoginRequiredMixin, ListView):
+    model = StudentGroup
+    fields = ['event','groupname','numavail','transport']
+    template_name = 'events/view_groups.html'
+    context_object_name = 'view_groups'
+
+    def get_queryset(self):
+        current_user = self.request.user
+        print(current_user)
+        return StudentGroup.objects.all()
 
 class EventCategoryUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'login'

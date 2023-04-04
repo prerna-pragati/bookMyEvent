@@ -24,6 +24,8 @@ from .views import (
     CompleteEventUserList,
     CreateUserMark,
     UserMarkList,
+    GroupsCreateView,
+    ViewGroupsListView,
     search_event_category,
     search_event,
     create_event,
@@ -38,6 +40,8 @@ urlpatterns = [
     path('event-list/', EventListView.as_view(), name='event-list'),
     path('book-event/', BookEventCreateView.as_view(), name='book-event'),
     path('view-bookings/', ViewBookingsListView.as_view(), name='view-bookings'),
+    path('create-groups/', GroupsCreateView.as_view(), name='create-groups'),
+    path('view-groups/', ViewGroupsListView.as_view(), name='view-groups'),
     
     path('event/<int:pk>/edit/', EventUpdateView.as_view(), name='event-edit'),
     path('detail/<int:pk>', EventDetailView.as_view(), name='event-detail'),
